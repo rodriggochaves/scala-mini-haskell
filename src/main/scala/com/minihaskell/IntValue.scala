@@ -1,0 +1,1 @@
+case class IntValue( val i: Int ) extends ConcreteValue[Int](i) { }
