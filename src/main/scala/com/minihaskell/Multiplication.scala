@@ -1,7 +1,9 @@
+package com.minihaskell
+
 class Multiplication extends BinaryExpression {
   
   // TODO
-  def eval() : Expression = {
+  def eval() : Value = {
     println("implementar eval")
     return null;
   }

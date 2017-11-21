@@ -1,3 +1,5 @@
+package com.minihaskell
+
 trait Expression {
-  def eval() : Expression
+  def eval() : Value
 }

@@ -1,1 +1,3 @@
-case class IntValue( val i: Int ) extends ConcreteValue[Int](i) { }
+package com.minihaskell
+
+case class IntValue( val value: Integer ) extends ConcreteValue[Integer](value)
