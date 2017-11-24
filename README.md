@@ -55,5 +55,5 @@ Uma classe que tem:
 **Verificação de Tipos**
 
 **Tentar melhorar o Código**
-+ implementação de Stack mais atualizada
++ [x] implementação de Stack mais atualizada
 + nome dos funções
