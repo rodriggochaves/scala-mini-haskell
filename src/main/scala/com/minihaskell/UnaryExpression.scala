@@ -8,4 +8,13 @@ case class NotExpression(exp: Expression) extends UnaryExpression {
     case BooleanValue(bool) => BooleanValue(!bool)
     case _                  => throw new Exception("oops")
   }
+
+  override def evalType(): Type = {
+    val ty = exp.evalType()
+
+    if( ty.isInstanceOf[BooleanType] ) {
+      return BooleanType()
+    }
+    return ErrorType()
+  }
 }
