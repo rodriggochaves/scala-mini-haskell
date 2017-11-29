@@ -13,6 +13,16 @@ class SumExpression(val lhs: Expression, val rhs: Expression)
 
     IntValue(v1.value + v2.value)
   }
+
+  override def evalType(): Type = {
+    val t1 = lhs.evalType()
+    val t2 = rhs.evalType()
+
+    if( t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType] ) {
+      return IntegerType()
+    }
+    return ErrorType()
+  }
 }
 
 class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
@@ -24,6 +34,16 @@ class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
 
     IntValue(v1.value * v2.value)
   }
+
+  override def evalType(): Type = {
+    val t1 = lhs.evalType()
+    val t2 = rhs.evalType()
+
+    if( t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType] ) {
+      return IntegerType()
+    }
+    return ErrorType()
+  }
 }
 
 class DivisionExpression(val lhs: Expression, val rhs: Expression)
@@ -34,6 +54,16 @@ class DivisionExpression(val lhs: Expression, val rhs: Expression)
     val v2 = rhs.eval().asInstanceOf[IntValue]
 
     IntValue(v1.value / v2.value)
+  }
+
+  override def evalType(): Type = {
+    val t1 = lhs.evalType()
+    val t2 = rhs.evalType()
+
+    if( t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType] ) {
+      return IntegerType()
+    }
+    return ErrorType()
   }
 }
 
@@ -48,6 +78,16 @@ class AndExpression(val lhs: Expression, val rhs: Expression)
 
     BooleanValue(v1.value && v2.value)
   }
+
+  override def evalType(): Type = {
+    val t1 = lhs.evalType()
+    val t2 = rhs.evalType()
+
+    if( t1.isInstanceOf[BooleanType] && t2.isInstanceOf[BooleanType] ) {
+      return BooleanType()
+    }
+    return ErrorType()
+  }
 }
 
 class OrExpression(val lhs: Expression, val rhs: Expression)
@@ -58,5 +98,15 @@ class OrExpression(val lhs: Expression, val rhs: Expression)
     val v2 = rhs.eval().asInstanceOf[BooleanValue]
 
     BooleanValue(v1.value || v2.value)
+  }
+
+  override def evalType(): Type = {
+    val t1 = lhs.evalType()
+    val t2 = rhs.evalType()
+
+    if( t1.isInstanceOf[BooleanType] && t2.isInstanceOf[BooleanType] ) {
+      return BooleanType()
+    }
+    return ErrorType()
   }
 }
