@@ -34,7 +34,7 @@ Class Gama {
 + [x] NOT
 + [x] MULTIPLICAÇAO
 + [x] SUBTRACAO
-+ [ ] DIVISÃO
++ [x] DIVISÃO
 
 **Parâmetro**
 Uma classe que tem:

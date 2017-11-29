@@ -18,6 +18,13 @@ class BinaryExpressionSpec extends FlatSpec with Matchers {
     res should be (IntValue(15))
   }
 
+  it should "`15 / 3` == 5" in {
+    val div = new DivisionExpression(IntValue(15), IntValue(3))
+    val res = div.eval().asInstanceOf[IntValue]
+
+    res should be (IntValue(5))
+  }
+
   it should "`true && true` == true" in {
     val exp = new AndExpression(BooleanValue(true), BooleanValue(true))
     exp.eval().asInstanceOf[BooleanValue] should be (BooleanValue(true))
