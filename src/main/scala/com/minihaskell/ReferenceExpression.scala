@@ -1,6 +1,7 @@
 package com.minihaskell
 
 import com.minihaskell.memory.RunningEnvironment
+import com.minihaskell.memory.Gama
 import com.minihaskell.exceptions.UndeclaredVariableException
 
 case class ReferenceExpression( variable: String ) extends Expression {
@@ -9,8 +10,12 @@ case class ReferenceExpression( variable: String ) extends Expression {
     try {
       return RunningEnvironment.query(variable)
     } catch {
-      case _ => throw UndeclaredVariableException() 
+      case _: Throwable => throw UndeclaredVariableException() 
     }
+    }
+
+  override def evalType(): Type = {
+    Gama.find( variable )
   }
  
 }
