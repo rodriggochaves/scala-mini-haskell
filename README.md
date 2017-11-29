@@ -29,12 +29,12 @@ Class Gama {
 ## TO DO
 
 **Expressões pendentes**
-+ AND
-+ OR
-+ NOT
-+ MULTIPLICAÇAO
-+ SUBTRACAO
-+ DIVISÃO
++ [x] AND
++ [x] OR
++ [x] NOT
++ [x] MULTIPLICAÇAO
++ [x] SUBTRACAO
++ [x] DIVISÃO
 
 **Parâmetro**
 Uma classe que tem:
@@ -55,5 +55,5 @@ Uma classe que tem:
 **Verificação de Tipos**
 
 **Tentar melhorar o Código**
-+ implementação de Stack mais atualizada
++ [x] implementação de Stack mais atualizada
 + nome dos funções
