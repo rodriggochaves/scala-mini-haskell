@@ -8,4 +8,8 @@ class LambdaExpression( val id: String, val body: Expression ) extends Expressio
     return Closure(id, body, RunningEnvironment.getCurrent)
   }
 
+  override def evalType(): Type = {
+    return body.evalType()
+  }
+
 }
