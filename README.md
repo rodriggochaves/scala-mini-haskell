@@ -29,12 +29,12 @@ Class Gama {
 ## TO DO
 
 **Expressões pendentes**
-+ AND
-+ OR
-+ NOT
-+ MULTIPLICAÇAO
-+ SUBTRACAO
-+ DIVISÃO
++ [x] AND
++ [x] OR
++ [x] NOT
++ [x] MULTIPLICAÇAO
++ [x] SUBTRACAO
++ [ ] DIVISÃO
 
 **Parâmetro**
 Uma classe que tem:
