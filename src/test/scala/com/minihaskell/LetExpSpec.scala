@@ -17,4 +17,19 @@ class LetExpSpec extends FlatSpec with Matchers {
     let.eval() should be (IntValue(10))
   }
 
+  it should "return the correct type" in {
+    // let x = 10 in x + x
+    val let  = new LetExpression("x", IntValue(10),
+      new SumExpression(new ReferenceExpression("x"), new ReferenceExpression("x")))
+
+    let.evalType() shouldBe a [IntegerType]
+  }
+
+  it should "return ErrorType if we're not typing correctly" in {
+    val let  = new LetExpression("x", BooleanValue(true),
+      new SumExpression(new ReferenceExpression("x"), new ReferenceExpression("x")))
+    
+    let.evalType() shouldBe a [ErrorType]
+  }
+
 }
