@@ -12,7 +12,7 @@ case class ReferenceExpression( variable: String ) extends Expression {
     } catch {
       case _: Throwable => throw UndeclaredVariableException() 
     }
-    }
+  }
 
   override def evalType(): Type = {
     Gama.find( variable )
