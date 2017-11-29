@@ -15,4 +15,8 @@ class LetExpression( val id : String,
     return body.eval()
   }
 
+  override def evalType(): Type = {
+    return body.evalType()
+  }
+
 }
