@@ -1,6 +1,6 @@
 package com.minihaskell.memory
 
-import com.minihaskell.Value
+import com.minihaskell.ast.Value
 import com.minihaskell.exceptions.UndeclaredVariableException
 
 object RunningEnvironment {

@@ -1,4 +1,4 @@
-package com.minihaskell
+package com.minihaskell.ast
 
 import scala.collection.mutable
 

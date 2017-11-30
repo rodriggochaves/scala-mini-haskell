@@ -1,4 +1,4 @@
-package com.minihaskell
+package com.minihaskell.ast
 
 sealed trait BinaryExpression extends Expression
 

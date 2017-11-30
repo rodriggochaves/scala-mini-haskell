@@ -1,4 +1,4 @@
-package com.minihaskell
+package com.minihaskell.ast
 
 import com.minihaskell.memory.RunningEnvironment
 import com.minihaskell.exceptions.InvalidExpressionException
