@@ -10,5 +10,5 @@ sealed abstract class IrreducibleValue extends Value {
 
 case class BooleanValue(value: Boolean) extends IrreducibleValue
 case class IntValue(value: Integer)     extends IrreducibleValue
-case class Closure(id: String, body: Expression, env: mutable.HashMap[String, Value])
+case class Closure(id: String, body: Expression, env: Map[String, Value])
   extends IrreducibleValue

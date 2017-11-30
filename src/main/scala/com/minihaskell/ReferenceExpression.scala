@@ -9,8 +9,8 @@ case class ReferenceExpression( variable: String ) extends Expression {
     try {
       return RunningEnvironment.query(variable)
     } catch {
-      case _ => throw UndeclaredVariableException() 
+      case _: Throwable => throw UndeclaredVariableException() 
     }
   }
- 
+
 }

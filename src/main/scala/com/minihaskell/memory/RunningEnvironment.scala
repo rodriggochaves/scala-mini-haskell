@@ -1,40 +1,37 @@
 package com.minihaskell.memory
 
-import scala.collection.mutable
 import com.minihaskell.Value
 import com.minihaskell.exceptions.UndeclaredVariableException
 
 object RunningEnvironment {
-  private var stack: List[mutable.HashMap[String, Value]] = Nil
+  private var stack: List[Map[String, Value]] = Nil
 
   def update(variable: String, value: Value): Unit = {
-    checkIfStackEmpty()
-    stack.head += (variable -> value)
-  }
-
-  def query(variable: String): Value = {
-    if (stack.isEmpty) {
-      throw new UndeclaredVariableException
+    stack = stack match {
+      case h :: t => h + (variable -> value) :: t
+      case Nil    => Map(variable -> value):: Nil
     }
-    stack.head(variable)
   }
 
-  def getCurrent(): mutable.HashMap[String, Value] = {
-    checkIfStackEmpty()
-    stack.head
+  def query(variable: String): Value = stack match {
+    case h :: _ => h(variable)
+    case Nil    => throw new UndeclaredVariableException
+  }
+
+  def getCurrent(): Map[String, Value] = stack match {
+    case h :: _ => h
+    case Nil    => Map()
   }
 
   def remove(): Unit = {
     stack = stack.tail
   }
 
-  def create(env: mutable.HashMap[String, Value]) = {
+  def create(env: Map[String, Value]) = {
     stack = env :: stack
   }
 
-  private def checkIfStackEmpty() {
-    if (stack.isEmpty) {
-      stack = new mutable.HashMap[String, Value] :: Nil
-    }
+  def clean(): Unit = {
+    stack = Nil
   }
 }

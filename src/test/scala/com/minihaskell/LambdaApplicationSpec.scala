@@ -11,10 +11,10 @@ class LambdaApplicationSpec extends FlatSpec with Matchers {
     app.eval() should be (IntValue(6))
   }
 
-  ignore should "`( let y = 10 in let f = (x -> x + y) in let y = 20 in f(10) )` == 20" in {
+  it should "`( let y = 10 in let f = (x -> x + y) in let y = 20 in f(10) )` == 20" in {
     val let1 = new LetExpression("y", IntValue(20), LambdaApplication(
                                                       ReferenceExpression("f"), IntValue(10)))
-    val let2 = new LetExpression("f", new LambdaExpression("x", 
+    val let2 = new LetExpression("f", new LambdaExpression("x",
                     new SumExpression(ReferenceExpression("x"), ReferenceExpression("y"))), let1)
     val let3 = new LetExpression("y", IntValue(10), let2)
 
