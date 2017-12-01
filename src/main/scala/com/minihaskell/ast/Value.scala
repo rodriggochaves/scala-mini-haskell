@@ -1,7 +1,5 @@
 package com.minihaskell.ast
 
-import scala.collection.mutable
-
 sealed trait Value extends Expression
 
 sealed abstract class IrreducibleValue extends Value {
