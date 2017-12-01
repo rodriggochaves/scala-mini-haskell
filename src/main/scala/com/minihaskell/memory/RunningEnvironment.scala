@@ -1,5 +1,6 @@
 package com.minihaskell.memory
 
+import java.util.NoSuchElementException
 import com.minihaskell.ast.Value
 import com.minihaskell.exceptions.UndeclaredVariableException
 
@@ -14,7 +15,11 @@ object RunningEnvironment {
   }
 
   def query(variable: String): Value = stack match {
-    case h :: _ => h(variable)
+    case h :: _ => try {
+      h(variable)
+    } catch {
+      case _: NoSuchElementException => throw new UndeclaredVariableException
+    }
     case Nil    => throw new UndeclaredVariableException
   }
 
