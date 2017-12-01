@@ -24,4 +24,16 @@ class LambdaApplicationSpec extends FlatSpec with Matchers {
     let3.eval() should be (IntValue(20))
   }
 
+  it should "have a descriptive title" in {
+    RunningEnvironment.clean()
+    val x = ReferenceExpression("x")
+    val y = ReferenceExpression("y")
+    val body = new SumExpression(x, y)
+    Function("sqr", Map("x" -> (), "y" -> ()), body).eval()
+    val func = ReferenceExpression("sqr")
+    val call = FunctionCall(func, IntValue(10) :: IntValue(5) :: Nil)
+
+    call.eval() should be (IntValue(15))
+  }
+
 }

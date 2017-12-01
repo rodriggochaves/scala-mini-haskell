@@ -13,7 +13,7 @@ case class IntValue(value: Integer)     extends IrreducibleValue
 case class Closure(id: String, body: Expression, env: Map[String, Value])
   extends IrreducibleValue
 
-class Function(name: String, args: Map[String, Unit], body: Expression)
+case class Function(name: String, args: Map[String, Unit], body: Expression)
   extends IrreducibleValue {
 
   override def eval() = {

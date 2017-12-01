@@ -18,6 +18,21 @@ case class FunctionCall(fun: Expression, args: List[Expression])
         RunningEnvironment.remove()
         return res
       }
+      case Function(_, formalArgs, body) => {
+        RunningEnvironment.create(Map())
+        val names = formalArgs.keySet.toList
+        if (names.length != args.length) {
+          throw new InvalidExpressionException
+        }
+
+        for ((formal, actual) <- (names zip args)) {
+          RunningEnvironment.update(formal, actual.eval())
+        }
+
+        val res = body.eval()
+        RunningEnvironment.remove()
+        return res
+      }
       case _ => throw new InvalidExpressionException
     }
   }
