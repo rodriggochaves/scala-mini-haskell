@@ -25,7 +25,7 @@ class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
 }
 
 class DivisionExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
