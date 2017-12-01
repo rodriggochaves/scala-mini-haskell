@@ -3,16 +3,18 @@ package com.minihaskell.ast
 import com.minihaskell.memory.RunningEnvironment
 import com.minihaskell.exceptions.InvalidExpressionException
 
-case class LambdaApplication(exp1: Expression, exp2: Expression) extends Expression {
+case class FunctionCall(fun: Expression, args: List[Expression])
+  extends Expression {
 
   override def eval(): Value = {
-    val v1 = exp1.eval()
+    val funVal = fun.eval()
 
-    v1 match {
-      case Closure(v, c, env) => {
+    funVal match {
+      case Closure(param, body, env) => {
         RunningEnvironment.create(env)
-        RunningEnvironment.update(v, exp2.eval())
-        val res = c.eval()
+        /* TODO: Throw if args has more than 1 element */
+        RunningEnvironment.update(param, args.head.eval())
+        val res = body.eval()
         RunningEnvironment.remove()
         return res
       }
