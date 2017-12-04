@@ -16,6 +16,8 @@ class LetExpression( val id : String,
   }
 
   override def evalType(): Type = {
+    // o tipo da expressao nomeada tem que está correto para o tipo ser o do corpo. Caso o contrario
+    // o tipo do LET é ERRO.
     return body.evalType()
   }
 
