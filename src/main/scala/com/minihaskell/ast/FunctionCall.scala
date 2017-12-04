@@ -12,7 +12,11 @@ case class FunctionCall(fun: Expression, args: List[Expression])
     funVal match {
       case Closure(param, body, env) => {
         RunningEnvironment.create(env)
-        /* TODO: Throw if args has more than 1 element */
+
+        if (args.length != 1) {
+          throw new InvalidExpressionException
+        }
+
         RunningEnvironment.update(param, args.head.eval())
         val res = body.eval()
         RunningEnvironment.remove()
