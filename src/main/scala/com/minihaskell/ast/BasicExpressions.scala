@@ -2,7 +2,7 @@ package com.minihaskell.ast
 
 // Arithmetic Expressions ------------------------------------------------------
 
-class SumExpression(val lhs: Expression, val rhs: Expression)
+class AddExpression(val lhs: Expression, val rhs: Expression)
   extends Expression {
 
   override def eval(): Value = {

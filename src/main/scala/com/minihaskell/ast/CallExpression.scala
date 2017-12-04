@@ -3,7 +3,7 @@ package com.minihaskell.ast
 import com.minihaskell.memory.RunningEnvironment
 import com.minihaskell.exceptions.InvalidExpressionException
 
-case class FunctionCall(fun: Expression, args: List[Expression])
+case class CallExpression(fun: Expression, args: List[Expression])
   extends Expression {
 
   override def eval(): Value = {
@@ -40,5 +40,4 @@ case class FunctionCall(fun: Expression, args: List[Expression])
       case _ => throw new InvalidExpressionException
     }
   }
-
 }
