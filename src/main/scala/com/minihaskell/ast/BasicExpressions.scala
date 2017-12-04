@@ -13,6 +13,17 @@ class SumExpression(val lhs: Expression, val rhs: Expression)
   }
 }
 
+class SubExpression(val lhs: Expression, val rhs: Expression)
+  extends Expression {
+
+  override def eval(): Value = {
+    val v1 = lhs.eval().asInstanceOf[IntValue]
+    val v2 = rhs.eval().asInstanceOf[IntValue]
+
+    IntValue(v1.value - v2.value)
+  }
+}
+
 class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
   extends Expression {
 

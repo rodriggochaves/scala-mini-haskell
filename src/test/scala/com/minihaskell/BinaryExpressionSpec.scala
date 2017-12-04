@@ -11,6 +11,13 @@ class BinaryExpressionSpec extends FlatSpec with Matchers {
     res should be (IntValue(6))
   }
 
+  it should "`5 - 1` == 4" in {
+    val sum = new SubExpression(IntValue(5), IntValue(1))
+    val res = sum.eval().asInstanceOf[IntValue]
+
+    res should be (IntValue(4))
+  }
+
   it should "`5 * 3` == 15" in {
     val mul = new MultiplicationExpression(IntValue(5), IntValue(3))
     val res = mul.eval().asInstanceOf[IntValue]
