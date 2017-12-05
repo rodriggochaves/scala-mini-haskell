@@ -2,9 +2,7 @@ package com.minihaskell.ast
 
 // Arithmetic Expressions ------------------------------------------------------
 
-class AddExpression(val lhs: Expression, val rhs: Expression)
-  extends Expression {
-
+case class AddExpression(lhs: Expression, rhs: Expression) extends Expression {
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
     val v2 = rhs.eval().asInstanceOf[IntValue]
@@ -13,9 +11,7 @@ class AddExpression(val lhs: Expression, val rhs: Expression)
   }
 }
 
-class SubExpression(val lhs: Expression, val rhs: Expression)
-  extends Expression {
-
+case class SubExpression(lhs: Expression, rhs: Expression) extends Expression {
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
     val v2 = rhs.eval().asInstanceOf[IntValue]
@@ -24,7 +20,7 @@ class SubExpression(val lhs: Expression, val rhs: Expression)
   }
 }
 
-class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
+case class MultiplicationExpression(lhs: Expression, rhs: Expression)
   extends Expression {
 
   override def eval(): Value = {
@@ -35,7 +31,7 @@ class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
   }
 }
 
-class DivisionExpression(val lhs: Expression, val rhs: Expression)
+case class DivisionExpression(lhs: Expression, rhs: Expression)
   extends Expression {
 
   override def eval(): Value = {
@@ -48,7 +44,7 @@ class DivisionExpression(val lhs: Expression, val rhs: Expression)
 
 // Boolean Expressions ---------------------------------------------------------
 
-class AndExpression(val lhs: Expression, val rhs: Expression)
+case class AndExpression(lhs: Expression, rhs: Expression)
   extends Expression {
 
   override def eval(): Value = {
@@ -59,7 +55,7 @@ class AndExpression(val lhs: Expression, val rhs: Expression)
   }
 }
 
-class OrExpression(val lhs: Expression, val rhs: Expression)
+case class OrExpression(lhs: Expression, val rhs: Expression)
   extends Expression {
 
   override def eval(): Value = {
