@@ -2,12 +2,17 @@
 
 ```
 Exp:: Int
-	| Bool
-	| Soma Exp Exp
+  | Bool
+	| Add Exp Exp
+	| Sub Exp Exp
+	| Mul Exp Exp
+  | Div Exp Exp
 	| And Exp Exp
-	| Lambda(x) -> Exp
-	| AppLambda(Exp, Exp)
-	| Let x Exp Exp
+	| Or Exp Exp
+  | Not Exp
+  | Lambda \x -> Exp
+  | Call Exp Exp...
+  | Let x Exp Exp
 ```
 
 ## Projeto
@@ -16,7 +21,7 @@ Exp:: Int
 2. Suporte de multiplos parâmetros com seus respectivos tipos
 3. Declaração de Funções Nomeadas
 4. Implementar Expressão `If Then Else`
-5. Corrigir os erros de compilação dos testes disponibilizados.
+5. [x] Corrigir os erros de compilação dos testes disponibilizados.
 
 ## Sugestão
 
@@ -48,12 +53,12 @@ Uma classe que tem:
 + corpo: Expressão
 
 **Aplicação de Função Nomeada**
-```
-	| AppFuncaoNomeada(nome, Expressao)
-```
+
+A aplicação de função nomeada e de uma expressão lambda serão representadas
+da mesma forma na AST e na gramatica
 
 **Verificação de Tipos**
 
 **Tentar melhorar o Código**
 + [x] implementação de Stack mais atualizada
-+ nome dos funções
++ [x] nome dos funções

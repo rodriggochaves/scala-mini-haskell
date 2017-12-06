@@ -2,7 +2,7 @@ package com.minihaskell.memory
 
 import scala.collection.mutable
 
-import com.minihaskell.Type
+import com.minihaskell.ast.Type
 
 object Gama {
 

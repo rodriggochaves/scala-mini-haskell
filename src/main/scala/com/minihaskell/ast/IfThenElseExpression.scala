@@ -1,14 +1,14 @@
-package com.minihaskell
+package com.minihaskell.ast
 import com.minihaskell.exceptions.InvalidExpressionException
 
-case class IfThenElseExpression( cond: Expression, then: Expression, _else: Expression ) 
+case class IfThenElseExpression( cond: Expression, _then: Expression, _else: Expression )
      extends Expression{
 
   override def eval(): Value = {
     cond.eval() match{
       case BooleanValue(res) => {
         if(res){
-          then.eval()
+          _then.eval()
         }
         else{
           _else.eval()
@@ -21,11 +21,10 @@ case class IfThenElseExpression( cond: Expression, then: Expression, _else: Expr
   override def evalType(): Type = {
     val res = cond.eval().asInstanceOf[BooleanValue]
 
-    if(res.value){
-      return then.evalType()
-    }
-    else{
-      return _else.evalType()
+    if (res.value) {
+      _then.evalType()
+    } else {
+      _else.evalType()
     }
   }
 
