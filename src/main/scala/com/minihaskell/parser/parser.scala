@@ -38,7 +38,7 @@ object Parser extends Parsers {
   }
 
   def expression: Parser[Expression] = {
-    ifThenElse | lambda | let | add | sub | mult | div | number | identifier
+    call | paren | ifThenElse | lambda | let | add | sub | mult | div | number | identifier
   }
 
   def add: Parser[AddExpression] = {
@@ -92,6 +92,12 @@ object Parser extends Parsers {
     (IF ~ expression ~ THEN ~ expression ~ ELSE ~ expression) ^^ {
       case _ ~ cond ~ _ ~ then ~ _ ~ _else  =>
         IfThenElseExpression(cond, then, _else)
+    }
+  }
+
+  def call: Parser[CallExpression] = {
+    (operand ~ operand ~ operand.*) ^^ {
+      case func ~ first ~ params => CallExpression(func, first::params)
     }
   }
 
