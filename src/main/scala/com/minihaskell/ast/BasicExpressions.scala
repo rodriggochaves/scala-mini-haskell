@@ -16,10 +16,11 @@ class AddExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if( t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType] ) {
-      return IntegerType()
+    if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
+      IntegerType()
+    } else {
+      ErrorType()
     }
-    return ErrorType()
   }
 }
 
@@ -38,9 +39,10 @@ class SubExpression(val lhs: Expression, val rhs: Expression)
     val t2 = rhs.evalType()
 
     if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
-      return IntegerType()
+      IntegerType()
+    } else {
+      ErrorType()
     }
-    return ErrorType()
   }
 }
 
