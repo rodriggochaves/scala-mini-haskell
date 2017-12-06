@@ -19,9 +19,9 @@ case class IfThenElseExpression( cond: Expression, then: Expression, _else: Expr
   }
 
   override def evalType(): Type = {
-    val res = cond.eval().asInstanceOf[Boolean]
+    val res = cond.eval().asInstanceOf[BooleanValue]
 
-    if(res){
+    if(res.value){
       return then.evalType()
     }
     else{
