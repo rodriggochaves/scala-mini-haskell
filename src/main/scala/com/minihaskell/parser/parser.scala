@@ -38,7 +38,7 @@ object Parser extends Parsers {
   }
 
   def expression: Parser[Expression] = {
-    add | sub | mult | div | number | identifier
+    let | add | sub | mult | div | number | identifier
   }
 
   def add: Parser[AddExpression] = {
@@ -72,6 +72,13 @@ object Parser extends Parsers {
   def paren: Parser[Expression] = {
     (OPEN_PAREN ~ expression ~ CLOSE_PAREN) ^^ {
       case _ ~ exp ~ _ => exp
+    }
+  }
+
+  def let: Parser[Expression] = {
+    (LET ~ identifier ~ EQUAL ~ expression ~ IN ~ expression) ^^ {
+      case _ ~ id ~ _ ~ exp ~ _ ~ body =>
+        new LetExpression(id.variable, exp, body)
     }
   }
 
