@@ -27,10 +27,14 @@ object Parser extends Parsers {
   def apply(tokens: List[Token]): Either[(Int, Int), Expression] = {
     val reader = new TokenReader(tokens)
 
-    expression(reader) match {
+    program(reader) match {
       case NoSuccess(msg, next) => Left((next.pos.line, next.pos.column))
       case Success(result, next) => Right(result)
     }
+  }
+
+  def program: Parser[Expression] = {
+    phrase(rep1(expression)) ^^ { case list => list.head }
   }
 
   def expression: Parser[Expression] = {
@@ -62,7 +66,13 @@ object Parser extends Parsers {
   }
 
   def operand: Parser[Expression] = {
-    number | identifier
+    number | identifier | paren
+  }
+
+  def paren: Parser[Expression] = {
+    (OPEN_PAREN ~ expression ~ CLOSE_PAREN) ^^ {
+      case _ ~ exp ~ _ => exp
+    }
   }
 
   private def identifier: Parser[ReferenceExpression] = {
