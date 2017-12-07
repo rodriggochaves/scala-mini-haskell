@@ -25,13 +25,13 @@ class LetExpressionSpec extends FlatSpec with Matchers {
     val let = new LetExpression("x", IntValue(10),
       new AddExpression(new ReferenceExpression("x"), new ReferenceExpression("x")))
 
-    let.evalType() shouldBe a [IntegerType]
+    let.evalType() should be (IntegerType)
   }
 
   it should "return ErrorType if we're not typing correctly" in {
     val let = new LetExpression("x", BooleanValue(true),
       new AddExpression(new ReferenceExpression("x"), new ReferenceExpression("x")))
 
-    let.evalType() shouldBe a [ErrorType]
+    let.evalType() should be (ErrorType)
   }
 }

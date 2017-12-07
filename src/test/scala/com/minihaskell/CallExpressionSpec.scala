@@ -7,7 +7,7 @@ class CallExpressionSpec extends FlatSpec with Matchers {
 
   it should "`((x) -> x + 1) , 5` == 6" in {
     RunningEnvironment.clean()
-    val inc = new LambdaExpression("x", IntegerType(), new AddExpression(new ReferenceExpression("x"), IntValue(1)))
+    val inc = new LambdaExpression("x", IntegerType, new AddExpression(new ReferenceExpression("x"), IntValue(1)))
     val app = new CallExpression(inc, IntValue(5) :: Nil)
 
     app.eval() should be (IntValue(6))
@@ -17,7 +17,7 @@ class CallExpressionSpec extends FlatSpec with Matchers {
     RunningEnvironment.clean()
     val let1 = new LetExpression("y", IntValue(20), CallExpression(
                                                       ReferenceExpression("f"), IntValue(10) :: Nil ))
-    val let2 = new LetExpression("f", new LambdaExpression("x", IntegerType(),
+    val let2 = new LetExpression("f", new LambdaExpression("x", IntegerType,
                     new AddExpression(ReferenceExpression("x"), ReferenceExpression("y"))), let1)
     val let3 = new LetExpression("y", IntValue(10), let2)
 

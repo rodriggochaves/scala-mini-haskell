@@ -16,10 +16,10 @@ class AddExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
-      IntegerType()
+    if (t1 == IntegerType && t2 == IntegerType) {
+      IntegerType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -38,10 +38,10 @@ class SubExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
-      IntegerType()
+    if (t1 == IntegerType && t2 == IntegerType) {
+      IntegerType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -60,10 +60,10 @@ class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
-      IntegerType()
+    if (t1 == IntegerType && t2 == IntegerType) {
+      IntegerType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -82,10 +82,10 @@ class DivisionExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[IntegerType] && t2.isInstanceOf[IntegerType]) {
-      IntegerType()
+    if (t1 == IntegerType && t2 == IntegerType) {
+      IntegerType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -106,10 +106,10 @@ class AndExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[BooleanType] && t2.isInstanceOf[BooleanType]) {
-      BooleanType()
+    if (t1 == BooleanType && t2 == BooleanType) {
+      BooleanType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -128,10 +128,10 @@ class OrExpression(val lhs: Expression, val rhs: Expression)
     val t1 = lhs.evalType()
     val t2 = rhs.evalType()
 
-    if (t1.isInstanceOf[BooleanType] && t2.isInstanceOf[BooleanType]) {
-      BooleanType()
+    if (t1 == BooleanType && t2 == BooleanType) {
+      BooleanType
     } else {
-      ErrorType()
+      ErrorType
     }
   }
 }
@@ -144,11 +144,6 @@ case class NotExpression(exp: Expression) extends Expression {
 
   override def evalType(): Type = {
     val t1 = exp.evalType()
-
-    if (exp.isInstanceOf[BooleanType]) {
-      BooleanType()
-    } else {
-      ErrorType()
-    }
+    if (t1 == BooleanType) BooleanType else ErrorType
   }
 }

@@ -16,6 +16,6 @@ class IfThenElseSpec extends FlatSpec with Matchers {
   it should "be evaluated to IntegerType() when if(true) then 5 else false " in {
     val comp = new IfThenElseExpression( BooleanValue(true), IntValue(5), BooleanValue(false) )
 
-    comp.evalType() should be (IntegerType())
+    comp.evalType() should be (IntegerType)
   }
 }

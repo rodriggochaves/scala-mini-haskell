@@ -6,12 +6,12 @@ sealed trait Value extends Expression
 
 case class BooleanValue(value: Boolean) extends Value {
   override def eval(): Value = this
-  override def evalType(): Type = BooleanType()
+  override def evalType(): Type = BooleanType
 }
 
 case class IntValue(value: Integer) extends Value {
   override def eval(): Value = this
-  override def evalType(): Type = IntegerType()
+  override def evalType(): Type = IntegerType
 }
 
 case class Closure(id: String, _type: Type, body: Expression, env: Map[String, Value])
@@ -29,5 +29,5 @@ case class Function(name: String, args: Map[String, Unit], body: Expression)
     this
   }
 
-  override def evalType(): Type = ErrorType()
+  override def evalType(): Type = ErrorType
 }
