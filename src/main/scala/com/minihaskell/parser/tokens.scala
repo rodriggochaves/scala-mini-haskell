@@ -20,3 +20,5 @@ case object SUB                      extends Token
 case object ADD                      extends Token
 case object OPEN_PAREN               extends Token
 case object CLOSE_PAREN              extends Token
+case object TRUE                     extends Token
+case object FALSE                    extends Token

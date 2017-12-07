@@ -66,7 +66,7 @@ object Parser extends Parsers {
   }
 
   def operand: Parser[Expression] = {
-    number | variable | paren
+    _true | _false | number | variable | paren
   }
 
   def paren: Parser[Expression] = {
@@ -102,6 +102,14 @@ object Parser extends Parsers {
 
   def variable: Parser[ReferenceExpression] = {
     (identifier) ^^ { str => ReferenceExpression(str) }
+  }
+
+  def _true: Parser[BooleanValue] = {
+    (TRUE) ^^ { _ => BooleanValue(true) }
+  }
+
+  def _false: Parser[BooleanValue] = {
+    (FALSE) ^^ { _ => BooleanValue(false) }
   }
 
   private def identifier: Parser[String] = {

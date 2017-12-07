@@ -20,6 +20,8 @@ object Lexer extends RegexParsers {
       | _if
       | _then
       | _else
+      | _true
+      | _false
       | arrow
       | or
       | equal
@@ -58,6 +60,8 @@ object Lexer extends RegexParsers {
   def mult          = "*"             ^^ { _ => MULT }
   def sub           = "-"             ^^ { _ => SUB }
   def add           = "+"             ^^ { _ => ADD }
+  def _true         = "true"          ^^ { _ => TRUE }
+  def _false        = "false"         ^^ { _ => FALSE }
   def open_paren    = "("             ^^ { _ => OPEN_PAREN }
   def close_paren   = ")"             ^^ { _ => CLOSE_PAREN }
 }
