@@ -117,7 +117,7 @@ object Parser extends Parsers {
 
   def lambda: Parser[LambdaExpression] = {
     (param ~ ARROW ~ expression) ^^ {
-      case (id, _) ~ _ ~ body => new LambdaExpression(id, body)
+      case (id, ty) ~ _ ~ body => new LambdaExpression(id, ty, body)
     }
   }
 
@@ -152,17 +152,21 @@ object Parser extends Parsers {
     }
   }
 
-  private def _type: Parser[Unit] = {
-    (INT | BOOL) ^^ { _ => () }
+  private def _type: Parser[Type] = {
+    (INT | BOOL) ^^ {
+      case INT  => IntegerType
+      case BOOL => BooleanType
+      case _    => ErrorType
+    }
   }
 
-  private def param: Parser[(String, Unit)] = {
+  private def param: Parser[(String, Type)] = {
     (identifier ~ COLON ~ _type) ^^ {
       case id ~ _ ~ ty => (id, ty)
     }
   }
 
-  private def params: Parser[Map[String, Unit]] = {
+  private def params: Parser[Map[String, Type]] = {
     (param ~ param.*) ^^ {
       case (param, ty) ~ Nil  => Map(param -> ty)
       case (first, ty) ~ rest => Map(first -> ty) ++ rest.toMap
