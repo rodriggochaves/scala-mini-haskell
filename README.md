@@ -2,12 +2,17 @@
 
 ```
 Exp:: Int
-	| Bool
-	| Soma Exp Exp
-	| And Exp Exp
-	| Lambda(x) -> Exp
-	| AppLambda(Exp, Exp)
-	| Let x Exp Exp
+  | Bool
+  | Add Exp Exp
+  | Sub Exp Exp
+  | Mul Exp Exp
+  | Div Exp Exp
+  | And Exp Exp
+  | Or Exp Exp
+  | Not Exp
+  | Lambda \x -> Exp
+  | Call Exp Exp...
+  | Let x Exp Exp
 ```
 
 ## Projeto
@@ -48,12 +53,12 @@ Uma classe que tem:
 + corpo: Expressão
 
 **Aplicação de Função Nomeada**
-```
-	| AppFuncaoNomeada(nome, Expressao)
-```
+
+A aplicação de função nomeada e de uma expressão lambda serão representadas
+da mesma forma na AST e na gramatica
 
 **Verificação de Tipos**
 
 **Tentar melhorar o Código**
 + [x] implementação de Stack mais atualizada
-+ nome dos funções
++ [x] nome dos funções

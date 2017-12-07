@@ -5,10 +5,17 @@ import org.scalatest._
 class BinaryExpressionSpec extends FlatSpec with Matchers {
 
   it should "`5 + 1` == 6" in {
-    val sum = new SumExpression(IntValue(5), IntValue(1))
+    val sum = new AddExpression(IntValue(5), IntValue(1))
     val res = sum.eval().asInstanceOf[IntValue]
 
     res should be (IntValue(6))
+  }
+
+  it should "`5 - 1` == 4" in {
+    val sum = new SubExpression(IntValue(5), IntValue(1))
+    val res = sum.eval().asInstanceOf[IntValue]
+
+    res should be (IntValue(4))
   }
 
   it should "`5 * 3` == 15" in {

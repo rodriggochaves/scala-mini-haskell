@@ -1,23 +1,39 @@
 package com.minihaskell.ast
 
-import com.minihaskell.memory.RunningEnvironment
+import com.minihaskell.memory.{Gama, RunningEnvironment}
 
 sealed trait Value extends Expression
 
-sealed abstract class IrreducibleValue extends Value {
-  def eval(): Value = this
+case class BooleanValue(value: Boolean) extends Value {
+  override def eval(): Value = this
+  override def evalType(): Type = BooleanType
 }
 
-case class BooleanValue(value: Boolean) extends IrreducibleValue
-case class IntValue(value: Integer)     extends IrreducibleValue
-case class Closure(id: String, body: Expression, env: Map[String, Value])
-  extends IrreducibleValue
+case class IntValue(value: Integer) extends Value {
+  override def eval(): Value = this
+  override def evalType(): Type = IntegerType
+}
 
-case class Function(name: String, args: Map[String, Unit], body: Expression)
-  extends IrreducibleValue {
+case class Closure(id: String, _type: Type, body: Expression, env: Map[String, Value])
+  extends Value {
 
-  override def eval() = {
+  override def eval(): Value = this
+  override def evalType(): Type = body.evalType()
+}
+
+case class Function(name: String, args: Map[String, Type], body: Expression)
+  extends Value {
+
+  override def eval(): Value = {
     RunningEnvironment.update(name, this)
     this
+  }
+
+  override def evalType(): Type = {
+    for ((name, ty) <- args) {
+      Gama.insert(name, ty)
+    }
+
+    FnType(args.values.toList, body.evalType())
   }
 }

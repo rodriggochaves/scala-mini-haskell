@@ -3,14 +3,14 @@ package com.minihaskell.ast
 import com.minihaskell.memory.RunningEnvironment
 import com.minihaskell.exceptions.InvalidExpressionException
 
-case class FunctionCall(fun: Expression, args: List[Expression])
+case class CallExpression(fun: Expression, args: List[Expression])
   extends Expression {
 
   override def eval(): Value = {
     val funVal = fun.eval()
 
     funVal match {
-      case Closure(param, body, env) => {
+      case Closure(param, _, body, env) => {
         RunningEnvironment.create(env)
 
         if (args.length != 1) {
@@ -41,4 +41,5 @@ case class FunctionCall(fun: Expression, args: List[Expression])
     }
   }
 
+  override def evalType(): Type = fun.evalType()
 }

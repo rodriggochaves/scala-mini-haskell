@@ -1,24 +1,19 @@
 package com.minihaskell.ast
 
-import com.minihaskell.memory.RunningEnvironment
-import com.minihaskell.memory.Gama
+import com.minihaskell.memory.{Gama, RunningEnvironment}
 
-class LetExpression( val id : String,
-                     val namedExpression : Expression,
-                     val body : Expression ) extends Expression {
+class LetExpression(val id: String, val exp: Expression, val body: Expression)
+  extends Expression {
 
-  Gama.insert( id, namedExpression.evalType() )
-  
+  Gama.insert(id, exp.evalType())
+
   override def eval(): Value = {
-    val value = namedExpression.eval()
-    RunningEnvironment.update( id, value )
-    return body.eval()
+    val value = exp.eval()
+    RunningEnvironment.update(id, value)
+    body.eval()
   }
 
-  override def evalType(): Type = {
-    // o tipo da expressao nomeada tem que está correto para o tipo ser o do corpo. Caso o contrario
-    // o tipo do LET é ERRO.
-    return body.evalType()
-  }
-
+  // o tipo da expressao nomeada tem que está correto para o tipo ser o do
+  // corpo. Caso o contrario o tipo do LET é ERRO.
+  override def evalType(): Type = body.evalType()
 }
