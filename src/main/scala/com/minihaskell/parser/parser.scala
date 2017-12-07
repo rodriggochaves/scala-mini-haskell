@@ -38,7 +38,7 @@ object Parser extends Parsers {
   }
 
   def expression: Parser[Expression] = {
-    call | paren | ifThenElse | lambda | let | add | sub | mult | div | number | variable
+    _false | _true | call | paren | ifThenElse | lambda | let | add | sub | mult | div | and | or | not | number | variable
   }
 
   def add: Parser[AddExpression] = {
@@ -62,6 +62,24 @@ object Parser extends Parsers {
   def div: Parser[DivisionExpression] = {
     (operand ~ DIV ~ operand) ^^ {
       case lhs ~ _ ~ rhs => DivisionExpression(lhs, rhs)
+    }
+  }
+
+  def and: Parser[AndExpression] = {
+    (operand ~ AND ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => AndExpression(lhs, rhs)
+    }
+  }
+
+  def or: Parser[OrExpression] = {
+    (operand ~ OR ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => OrExpression(lhs, rhs)
+    }
+  }
+
+  def not: Parser[NotExpression] = {
+    (NOT ~ operand) ^^ {
+      case _ ~ exp => NotExpression(exp)
     }
   }
 
