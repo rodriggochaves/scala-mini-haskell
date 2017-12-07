@@ -1,10 +1,10 @@
-package com.minihaskell
+package com.minihaskell.ast
 
 import com.minihaskell.memory.RunningEnvironment
 import com.minihaskell.memory.Gama
 
-class LetExpression( val id : String, 
-                     val namedExpression : Expression, 
+class LetExpression( val id : String,
+                     val namedExpression : Expression,
                      val body : Expression ) extends Expression {
 
   Gama.insert( id, namedExpression.evalType() )

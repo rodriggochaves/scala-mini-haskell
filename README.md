@@ -16,7 +16,7 @@ Exp:: Int
 2. Suporte de multiplos parâmetros com seus respectivos tipos
 3. Declaração de Funções Nomeadas
 4. Implementar Expressão `If Then Else`
-5. Corrigir os erros de compilação dos testes disponibilizados.
+5. [x] Corrigir os erros de compilação dos testes disponibilizados.
 
 ## Sugestão
 

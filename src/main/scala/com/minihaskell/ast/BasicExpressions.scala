@@ -1,11 +1,9 @@
-package com.minihaskell
-
-sealed trait BinaryExpression extends Expression
+package com.minihaskell.ast
 
 // Arithmetic Expressions ------------------------------------------------------
 
 class SumExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
@@ -26,7 +24,7 @@ class SumExpression(val lhs: Expression, val rhs: Expression)
 }
 
 class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
@@ -47,7 +45,7 @@ class MultiplicationExpression(val lhs: Expression, val rhs: Expression)
 }
 
 class DivisionExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[IntValue]
@@ -70,7 +68,7 @@ class DivisionExpression(val lhs: Expression, val rhs: Expression)
 // Boolean Expressions ---------------------------------------------------------
 
 class AndExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[BooleanValue]
@@ -91,7 +89,7 @@ class AndExpression(val lhs: Expression, val rhs: Expression)
 }
 
 class OrExpression(val lhs: Expression, val rhs: Expression)
-  extends BinaryExpression {
+  extends Expression {
 
   override def eval(): Value = {
     val v1 = lhs.eval().asInstanceOf[BooleanValue]
@@ -108,5 +106,13 @@ class OrExpression(val lhs: Expression, val rhs: Expression)
       return BooleanType()
     }
     return ErrorType()
+  }
+}
+
+case class NotExpression(exp: Expression) extends Expression {
+
+  override def eval(): Value = exp.eval() match {
+    case BooleanValue(bool) => BooleanValue(!bool)
+    case _                  => throw new Exception("oops")
   }
 }
