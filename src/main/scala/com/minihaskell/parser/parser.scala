@@ -100,8 +100,8 @@ object Parser extends Parsers {
   }
 
   def lambda: Parser[LambdaExpression] = {
-    (identifier ~ ARROW ~ expression) ^^ {
-      case id ~ _ ~ body => new LambdaExpression(id, body)
+    (param ~ ARROW ~ expression) ^^ {
+      case (id, _) ~ _ ~ body => new LambdaExpression(id, body)
     }
   }
 
@@ -128,6 +128,16 @@ object Parser extends Parsers {
 
   def _false: Parser[BooleanValue] = {
     (FALSE) ^^ { _ => BooleanValue(false) }
+  }
+
+  def _type: Parser[Unit] = {
+    (INT | BOOL) ^^ { _ => () }
+  }
+
+  private def param: Parser[(String, Unit)] = {
+    (identifier ~ COLON ~ _type) ^^ {
+      case id ~ _ ~ ty => (id, ty)
+    }
   }
 
   private def identifier: Parser[String] = {
