@@ -3,12 +3,12 @@
 ```
 Exp:: Int
   | Bool
-	| Add Exp Exp
-	| Sub Exp Exp
-	| Mul Exp Exp
+  | Add Exp Exp
+  | Sub Exp Exp
+  | Mul Exp Exp
   | Div Exp Exp
-	| And Exp Exp
-	| Or Exp Exp
+  | And Exp Exp
+  | Or Exp Exp
   | Not Exp
   | Lambda \x -> Exp
   | Call Exp Exp...
