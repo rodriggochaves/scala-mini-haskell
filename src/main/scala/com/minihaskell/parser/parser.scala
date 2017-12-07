@@ -38,9 +38,7 @@ object Parser extends Parsers {
   }
 
   def expression: Parser[Expression] = (
-      _false
-    | _true
-    | function
+      function
     | call
     | paren
     | ifThenElse
@@ -54,6 +52,8 @@ object Parser extends Parsers {
     | or
     | not
     | number
+    | _false
+    | _true
     | variable
   )
 
