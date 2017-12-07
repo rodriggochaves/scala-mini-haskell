@@ -40,6 +40,7 @@ object Parser extends Parsers {
   def expression: Parser[Expression] = (
       _false
     | _true
+    | function
     | call
     | paren
     | ifThenElse
@@ -145,7 +146,13 @@ object Parser extends Parsers {
     (FALSE) ^^ { _ => BooleanValue(false) }
   }
 
-  def _type: Parser[Unit] = {
+  def function: Parser[Function] = {
+    (identifier ~ params ~ EQUAL ~ expression) ^^ {
+      case id ~ params ~ _ ~ body => Function(id, params, body)
+    }
+  }
+
+  private def _type: Parser[Unit] = {
     (INT | BOOL) ^^ { _ => () }
   }
 
@@ -155,11 +162,18 @@ object Parser extends Parsers {
     }
   }
 
+  private def params: Parser[Map[String, Unit]] = {
+    (param ~ param.*) ^^ {
+      case (param, ty) ~ Nil  => Map(param -> ty)
+      case (first, ty) ~ rest => Map(first -> ty) ++ rest.toMap
+    }
+  }
+
   private def identifier: Parser[String] = {
     accept("identifier", { case IDENTIFIER(name) => name })
   }
 
-  private def number: Parser[IntValue] = {
+  def number: Parser[IntValue] = {
     accept("number", { case NUMBER(value) => IntValue(value.toInt) })
   }
 }
