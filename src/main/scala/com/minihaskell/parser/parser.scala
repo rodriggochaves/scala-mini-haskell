@@ -38,7 +38,7 @@ object Parser extends Parsers {
   }
 
   def expression: Parser[Expression] = {
-    call | paren | ifThenElse | lambda | let | add | sub | mult | div | number | identifier
+    call | paren | ifThenElse | lambda | let | add | sub | mult | div | number | variable
   }
 
   def add: Parser[AddExpression] = {
@@ -66,7 +66,7 @@ object Parser extends Parsers {
   }
 
   def operand: Parser[Expression] = {
-    number | identifier | paren
+    number | variable | paren
   }
 
   def paren: Parser[Expression] = {
@@ -77,14 +77,13 @@ object Parser extends Parsers {
 
   def let: Parser[Expression] = {
     (LET ~ identifier ~ EQUAL ~ expression ~ IN ~ expression) ^^ {
-      case _ ~ id ~ _ ~ exp ~ _ ~ body =>
-        new LetExpression(id.variable, exp, body)
+      case _ ~ id ~ _ ~ exp ~ _ ~ body => new LetExpression(id, exp, body)
     }
   }
 
   def lambda: Parser[LambdaExpression] = {
     (identifier ~ ARROW ~ expression) ^^ {
-      case id ~ _ ~ body => new LambdaExpression(id.variable, body)
+      case id ~ _ ~ body => new LambdaExpression(id, body)
     }
   }
 
@@ -101,8 +100,12 @@ object Parser extends Parsers {
     }
   }
 
-  private def identifier: Parser[ReferenceExpression] = {
-    accept("identifier", { case IDENTIFIER(name) => ReferenceExpression(name) })
+  def variable: Parser[ReferenceExpression] = {
+    (identifier) ^^ { str => ReferenceExpression(str) }
+  }
+
+  private def identifier: Parser[String] = {
+    accept("identifier", { case IDENTIFIER(name) => name })
   }
 
   private def number: Parser[IntValue] = {
