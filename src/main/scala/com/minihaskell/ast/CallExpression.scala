@@ -10,7 +10,7 @@ case class CallExpression(fun: Expression, args: List[Expression])
     val funVal = fun.eval()
 
     funVal match {
-      case Closure(param, body, env) => {
+      case Closure(param, _, body, env) => {
         RunningEnvironment.create(env)
 
         if (args.length != 1) {
@@ -40,4 +40,6 @@ case class CallExpression(fun: Expression, args: List[Expression])
       case _ => throw new InvalidExpressionException
     }
   }
+
+  override def evalType(): Type = fun.evalType()
 }
