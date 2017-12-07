@@ -29,7 +29,7 @@ class CallExpressionSpec extends FlatSpec with Matchers {
     val x = ReferenceExpression("x")
     val y = ReferenceExpression("y")
     val body = new AddExpression(x, y)
-    Function("sqr", Map("x" -> (()), "y" -> (())), body).eval()
+    Function("sqr", Map("x" -> IntegerType, "y" -> IntegerType), body).eval()
     val func = ReferenceExpression("sqr")
     val call = CallExpression(func, IntValue(10) :: IntValue(5) :: Nil)
 

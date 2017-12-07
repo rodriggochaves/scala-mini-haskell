@@ -1,6 +1,6 @@
 package com.minihaskell.ast
 
-import com.minihaskell.memory.RunningEnvironment
+import com.minihaskell.memory.{Gama, RunningEnvironment}
 
 sealed trait Value extends Expression
 
@@ -21,7 +21,7 @@ case class Closure(id: String, _type: Type, body: Expression, env: Map[String, V
   override def evalType(): Type = body.evalType()
 }
 
-case class Function(name: String, args: Map[String, Unit], body: Expression)
+case class Function(name: String, args: Map[String, Type], body: Expression)
   extends Value {
 
   override def eval(): Value = {
@@ -29,5 +29,11 @@ case class Function(name: String, args: Map[String, Unit], body: Expression)
     this
   }
 
-  override def evalType(): Type = ErrorType
+  override def evalType(): Type = {
+    for ((name, ty) <- args) {
+      Gama.insert(name, ty)
+    }
+
+    FnType(args.values.toList, body.evalType())
+  }
 }
