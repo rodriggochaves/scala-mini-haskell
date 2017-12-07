@@ -37,9 +37,24 @@ object Parser extends Parsers {
     phrase(rep1(expression)) ^^ { case list => list.head }
   }
 
-  def expression: Parser[Expression] = {
-    _false | _true | call | paren | ifThenElse | lambda | let | add | sub | mult | div | and | or | not | number | variable
-  }
+  def expression: Parser[Expression] = (
+      _false
+    | _true
+    | call
+    | paren
+    | ifThenElse
+    | lambda
+    | let
+    | add
+    | sub
+    | mult
+    | div
+    | and
+    | or
+    | not
+    | number
+    | variable
+  )
 
   def add: Parser[AddExpression] = {
     (operand ~ ADD ~ operand) ^^ {
