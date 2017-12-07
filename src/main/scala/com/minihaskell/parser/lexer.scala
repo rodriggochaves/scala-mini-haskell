@@ -18,7 +18,7 @@ object Lexer extends RegexParsers {
         let
       | in
       | _if
-      | then
+      | _then
       | _else
       | arrow
       | or
@@ -47,7 +47,7 @@ object Lexer extends RegexParsers {
   def let           = "let"           ^^ { _ => LET }
   def in            = "in"            ^^ { _ => IN }
   def _if           = "if"            ^^ { _ => IF }
-  def then          = "then"          ^^ { _ => THEN }
+  def _then         = "then"          ^^ { _ => THEN }
   def _else         = "else"          ^^ { _ => ELSE }
   def arrow         = "->"            ^^ { _ => ARROW }
   def or            = "||"            ^^ { _ => OR }

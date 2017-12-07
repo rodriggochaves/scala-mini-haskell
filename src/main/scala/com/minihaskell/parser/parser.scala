@@ -90,8 +90,8 @@ object Parser extends Parsers {
 
   def ifThenElse: Parser[IfThenElseExpression] = {
     (IF ~ expression ~ THEN ~ expression ~ ELSE ~ expression) ^^ {
-      case _ ~ cond ~ _ ~ then ~ _ ~ _else  =>
-        IfThenElseExpression(cond, then, _else)
+      case _ ~ cond ~ _ ~ _then ~ _ ~ _else  =>
+        IfThenElseExpression(cond, _then, _else)
     }
   }
 
