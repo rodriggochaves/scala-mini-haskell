@@ -22,6 +22,10 @@ object Lexer extends RegexParsers {
       | _else
       | _true
       | _false
+      | int
+      | bool
+      | colon
+      | semi_colon
       | arrow
       | or
       | equal
@@ -64,4 +68,8 @@ object Lexer extends RegexParsers {
   def _false        = "false"         ^^ { _ => FALSE }
   def open_paren    = "("             ^^ { _ => OPEN_PAREN }
   def close_paren   = ")"             ^^ { _ => CLOSE_PAREN }
+  def colon         = ":"             ^^ { _ => COLON }
+  def semi_colon    = ";"             ^^ { _ => SEMI_COLON }
+  def int           = "Int"           ^^ { _ => INT }
+  def bool          = "Bool"          ^^ { _ => BOOL }
 }

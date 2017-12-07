@@ -22,3 +22,7 @@ case object OPEN_PAREN               extends Token
 case object CLOSE_PAREN              extends Token
 case object TRUE                     extends Token
 case object FALSE                    extends Token
+case object COLON                    extends Token
+case object SEMI_COLON               extends Token
+case object INT                      extends Token
+case object BOOL                     extends Token
