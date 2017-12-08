@@ -11,10 +11,9 @@ object Main extends App {
   init
 
   private def init {
-    try {
-      parse(read.get)
-    } catch {
-      case _: NoSuchElementException => System.exit(0)
+    read match {
+      case Some(line) => parse(line)
+      case None       => System.exit(0)
     }
 
     init
