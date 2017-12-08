@@ -1,7 +1,6 @@
 package com.minihaskell.repl
 
 import scala.io.StdIn
-import java.util.NoSuchElementException
 
 import com.minihaskell.parser.{Lexer, Parser}
 import com.minihaskell.exceptions._
@@ -32,6 +31,7 @@ object Main extends App {
     } catch {
       case _: InvalidExpressionException  => println("Invalid Expression")
       case _: UndeclaredVariableException => println("Undeclared Variable")
+      case x: Throwable                   => println(x)
     }
   }
 
