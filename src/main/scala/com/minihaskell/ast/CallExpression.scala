@@ -10,25 +10,23 @@ case class CallExpression(fun: Expression, args: List[Expression])
     val funVal = fun.eval()
 
     funVal match {
-      case Closure(param, _, body, env) => {
-        RunningEnvironment.create(env)
-        prepareEnv(param :: Nil)
-        val res = body.eval()
-        RunningEnvironment.remove()
-        return res
-      }
-      case Function(_, formalArgs, body) => {
-        RunningEnvironment.create(Map())
-        prepareEnv(formalArgs)
-        val res = body.eval()
-        RunningEnvironment.remove()
-        return res
-      }
+      case Closure(param, ty, body, env) => execute(Map(param->ty), body, env)
+      case Function(_, formal, body)     => execute(formal, body, Map())
       case _ => throw new InvalidExpressionException
     }
   }
 
   override def evalType(): Type = fun.evalType()
+
+  private def execute(formal: Map[String, Type],
+                      body: Expression,
+                      env: Map[String, Value]): Value = {
+    RunningEnvironment.create(env)
+    prepareEnv(formal)
+    val res = body.eval()
+    RunningEnvironment.remove()
+    res
+  }
 
   private def prepareEnv(names: List[String]): Unit = {
     if (names.length != args.length) {
