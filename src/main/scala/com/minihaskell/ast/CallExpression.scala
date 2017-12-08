@@ -12,27 +12,14 @@ case class CallExpression(fun: Expression, args: List[Expression])
     funVal match {
       case Closure(param, _, body, env) => {
         RunningEnvironment.create(env)
-
-        if (args.length != 1) {
-          throw new InvalidExpressionException
-        }
-
-        RunningEnvironment.update(param, args.head.eval())
+        prepareEnv(param :: Nil)
         val res = body.eval()
         RunningEnvironment.remove()
         return res
       }
       case Function(_, formalArgs, body) => {
         RunningEnvironment.create(Map())
-        val names = formalArgs.keySet.toList
-        if (names.length != args.length) {
-          throw new InvalidExpressionException
-        }
-
-        for ((formal, actual) <- (names zip args)) {
-          RunningEnvironment.update(formal, actual.eval())
-        }
-
+        prepareEnv(formalArgs)
         val res = body.eval()
         RunningEnvironment.remove()
         return res
@@ -42,4 +29,17 @@ case class CallExpression(fun: Expression, args: List[Expression])
   }
 
   override def evalType(): Type = fun.evalType()
+
+  private def prepareEnv(names: List[String]): Unit = {
+    if (names.length != args.length) {
+      throw new InvalidExpressionException
+    }
+
+    for ((formal, actual) <- (names zip args)) {
+      RunningEnvironment.update(formal, actual.eval())
+    }
+  }
+
+  private def prepareEnv(names: Map[String, Type]): Unit =
+    prepareEnv(names.keySet.toList)
 }
