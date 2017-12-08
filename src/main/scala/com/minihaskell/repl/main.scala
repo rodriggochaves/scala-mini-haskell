@@ -42,7 +42,7 @@ object Main extends App {
   private def eval(implicit expr: Expression): String = expr.eval() match {
     case IntValue(n)          => n.toString
     case BooleanValue(b)      => b.toString
-    case Function(name, _, _) => "[Fn $name]"
+    case Function(name, _, _) => s"[Fn $name]"
     case Closure(_, _, _, _)  => "[Lambda]"
   }
 
