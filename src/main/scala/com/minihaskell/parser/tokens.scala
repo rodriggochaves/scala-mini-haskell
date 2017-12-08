@@ -26,3 +26,7 @@ case object COLON                    extends Token
 case object SEMI_COLON               extends Token
 case object INT                      extends Token
 case object BOOL                     extends Token
+case object LESS_THAN                extends Token
+case object GREATER_THAN             extends Token
+case object LESS_THAN_OR_EQUAL       extends Token
+case object GREATER_THAN_OR_EQUAL    extends Token
