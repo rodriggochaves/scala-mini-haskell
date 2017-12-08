@@ -72,4 +72,8 @@ object Lexer extends RegexParsers {
   def semi_colon    = ";"             ^^ { _ => SEMI_COLON }
   def int           = "Int"           ^^ { _ => INT }
   def bool          = "Bool"          ^^ { _ => BOOL }
+  def less_than     = "<"             ^^ { _ => LESS_THAN }
+  def greater_than  = ">"             ^^ { _ => GREATER_THAN }
+  def less_than_or_equal    = "<="    ^^ { _ => LESS_THAN_OR_EQUAL }
+  def greater_than_or_equal = ">="    ^^ { _ => GREATER_THAN_OR_EQUAL }
 }
