@@ -4,6 +4,7 @@ import scala.io.StdIn
 import java.util.NoSuchElementException
 
 import com.minihaskell.parser.{Lexer, Parser}
+import com.minihaskell.exceptions._
 import com.minihaskell.ast._
 
 object Main extends App {
@@ -27,7 +28,11 @@ object Main extends App {
   }
 
   private def execute(implicit expr: Expression) {
-    println(s"$evalType: $eval")
+    try {
+      println(s"$evalType: $eval")
+    } catch {
+      case _: InvalidExpressionException => println("Invalid Expression")
+    }
   }
 
   private def evalType(implicit expr: Expression): String = {
@@ -35,7 +40,7 @@ object Main extends App {
       case IntegerType  => "  Int"
       case BooleanType  => "  Bool"
       case FnType(_, _) => "  Fn"
-      case ErrorType    => throw new Exception("Invalid Expression")
+      case ErrorType    => throw InvalidExpressionException()
     }
   }
 
