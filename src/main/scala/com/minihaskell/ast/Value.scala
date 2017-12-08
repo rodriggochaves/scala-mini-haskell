@@ -34,6 +34,8 @@ case class Function(name: String, args: Map[String, Type], body: Expression)
       Gama.insert(name, ty)
     }
 
-    FnType(args.values.toList, body.evalType())
+    val res = FnType(args.values.toList, body.evalType())
+    Gama.insert(name, res)
+    res
   }
 }

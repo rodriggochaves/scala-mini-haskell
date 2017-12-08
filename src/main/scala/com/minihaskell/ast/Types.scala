@@ -2,7 +2,7 @@ package com.minihaskell.ast
 
 sealed trait Type
 
-object     ErrorType                          extends Type
-object     IntegerType                        extends Type
-object     BooleanType                        extends Type
-case class FnType(from: List[Type], to: Type) extends Type
+case object ErrorType                          extends Type
+case object IntegerType                        extends Type
+case object BooleanType                        extends Type
+case class  FnType(from: List[Type], to: Type) extends Type
