@@ -36,6 +36,6 @@ case class Function(name: String, args: Map[String, Type], body: Expression)
 
     val res = FnType(args.values.toList, body.evalType())
     Gama.insert(name, res)
-    return res
+    res
   }
 }
