@@ -31,7 +31,8 @@ object Main extends App {
     try {
       println(s"$evalType: $eval")
     } catch {
-      case _: InvalidExpressionException => println("Invalid Expression")
+      case _: InvalidExpressionException  => println("Invalid Expression")
+      case _: UndeclaredVariableException => println("Undeclared Variable")
     }
   }
 
