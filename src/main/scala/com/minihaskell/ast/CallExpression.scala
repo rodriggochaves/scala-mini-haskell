@@ -41,5 +41,25 @@ case class CallExpression(fun: Expression, args: List[Expression])
     }
   }
 
-  override def evalType(): Type = fun.evalType()
+  override def evalType(): Type = {
+    val funVal = fun.evalType()
+
+    funVal match {
+      case FnType(from, to) => {
+        if (args.length != from.length) {
+          return ErrorType
+        }
+        else {
+          for ((formal, actual) <- (from zip args)) {
+            if(actual.evalType() != formal){
+              return ErrorType
+            }
+          }
+          return to
+        }
+      }
+      case _ => return ErrorType
+    }
+
+  }
 }
