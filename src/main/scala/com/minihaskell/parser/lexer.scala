@@ -35,6 +35,10 @@ object Lexer extends RegexParsers {
       | mult
       | sub
       | add
+      | less_than_or_equal
+      | greater_than_or_equal
+      | less_than
+      | greater_than
       | number
       | identifier
       | open_paren

@@ -51,6 +51,10 @@ object Parser extends Parsers {
     | and
     | or
     | not
+    | less
+    | less_equal
+    | greater
+    | greater_equal
     | number
     | _false
     | _true
@@ -84,6 +88,30 @@ object Parser extends Parsers {
   def and: Parser[AndExpression] = {
     (operand ~ AND ~ operand) ^^ {
       case lhs ~ _ ~ rhs => AndExpression(lhs, rhs)
+    }
+  }
+
+  def less: Parser[LessExpression] = {
+    (operand ~ LESS_THAN ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => new LessExpression(lhs, rhs)
+    }
+  }
+
+  def greater: Parser[GreaterExpression] = {
+    (operand ~ GREATER_THAN ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => new GreaterExpression(lhs, rhs)
+    }
+  }
+
+  def less_equal: Parser[LessOrEqualExpression] = {
+    (operand ~ LESS_THAN_OR_EQUAL ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => new LessOrEqualExpression(lhs, rhs)
+    }
+  }
+
+  def greater_equal: Parser[GreaterOrEqualExpression] = {
+    (operand ~ GREATER_THAN_OR_EQUAL ~ operand) ^^ {
+      case lhs ~ _ ~ rhs => new GreaterOrEqualExpression(lhs, rhs)
     }
   }
 
