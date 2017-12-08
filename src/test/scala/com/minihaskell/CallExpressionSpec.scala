@@ -35,10 +35,6 @@ class CallExpressionSpec extends FlatSpec with Matchers {
 
   }
 
-
-
-
-
   it should "be evaluated to IntegerType() when call a multiplication function" in {
     RunningEnvironment.clean()
     val a = ReferenceExpression("a")
