@@ -3,13 +3,14 @@
 ```
 Exp:: Int
   | Bool
-	| Add Exp Exp
-	| Sub Exp Exp
-	| Mul Exp Exp
+  | Add Exp Exp
+  | Sub Exp Exp
+  | Mul Exp Exp
   | Div Exp Exp
-	| And Exp Exp
-	| Or Exp Exp
+  | And Exp Exp
+  | Or Exp Exp
   | Not Exp
+  | If Exp Then Exp Else Exp
   | Lambda \x -> Exp
   | Call Exp Exp...
   | Let x Exp Exp
@@ -17,11 +18,12 @@ Exp:: Int
 
 ## Projeto
 
-1. Expressões pendentes
-2. Suporte de multiplos parâmetros com seus respectivos tipos
-3. Declaração de Funções Nomeadas
-4. Implementar Expressão `If Then Else`
+1. [x] Expressões pendentes
+2. [x] Suporte de multiplos parâmetros com seus respectivos tipos
+3. [x] Declaração de Funções Nomeadas
+4. [x] Implementar Expressão `If Then Else`
 5. [x] Corrigir os erros de compilação dos testes disponibilizados.
+6. Checagem de tipos
 
 ## Sugestão
 

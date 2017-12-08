@@ -9,7 +9,7 @@ class LetExpSpec extends FlatSpec with Matchers {
   it should "( let x = 10 in x + y ) raise Exception" in {
     RunningEnvironment.clean()
     var let = new LetExpression("x", IntValue(10),
-      new AddExpression(new ReferenceExpression("x"), new ReferenceExpression("y")))
+      AddExpression(ReferenceExpression("x"), ReferenceExpression("y")))
 
     intercept[UndeclaredVariableException] {
       let.eval()
