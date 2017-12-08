@@ -31,25 +31,25 @@ class CallExpressionSpec extends FlatSpec with Matchers {
     val body = new AddExpression(x, y)
     Function("sqr", Map("x" -> IntegerType, "y" -> IntegerType), body).eval()
     val func = ReferenceExpression("sqr")
-    val call = CallExpression(func, IntValue(10) :: IntValue(5) :: Nil)
+    val call = CallExpression(func, IntValue(10) :: IntValue(5) :: Nil).eval() should be (IntValue(15))
 
-    call.eval() should be (IntValue(15))
   }
 
 
 
 
 
-  //it should "be evaluated to IntegerType() when call a multiplication function" in {
-  //  RunningEnvironment.clean()
-  //  val a = ReferenceExpression("a")
-  //  val b = ReferenceExpression("b")
-  //  val body = new MultiplicationExpression(a, b)
-  //  Function("Mult", Map("a" -> IntegerType, "b" -> IntegerType), body).eval()
-  //  val funcs = ReferenceExpression("Mult")
-  //  val call = CallExpression(funcs, IntValue(5) :: IntValue(5) :: Nil)
-  //  call.evalType() should be (IntegerType)
+  ignore should "be evaluated to IntegerType() when call a multiplication function" in {
+    RunningEnvironment.clean()
+    val a = ReferenceExpression("a")
+    val b = ReferenceExpression("b")
+    val body = new MultiplicationExpression(a, b)
 
-  //}
+    Function("Mult", Map("a" -> IntegerType, "b" -> IntegerType), body).eval()
+    val funcs = ReferenceExpression("Mult")
+
+    CallExpression(funcs, IntValue(5) :: IntValue(5) :: Nil).evalType() should be (IntegerType)
+    
+  }
 
 }
